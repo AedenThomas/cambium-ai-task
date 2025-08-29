@@ -3,6 +3,7 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
+import { Skeleton } from '@/components/ui/skeleton';
 import { Plus, Trash2, Loader2 } from 'lucide-react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { taskApi, Task, TaskCreate } from '@/lib/api';
@@ -96,6 +97,39 @@ const TodoApp = () => {
     deleteTaskMutation.mutate(id);
   };
 
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center p-4">
+        <Card className="w-full max-w-2xl mx-auto shadow-md">
+          <div className="p-8">
+            {/* Header */}
+            <header className="mb-8">
+              <h1 className="text-3xl font-bold text-foreground">My Tasks</h1>
+            </header>
+
+            {/* Task Input Form */}
+            <div className="mb-8">
+              <div className="flex gap-3">
+                <Skeleton className="flex-1 h-10" />
+                <Skeleton className="h-10 w-32" />
+              </div>
+            </div>
+
+            {/* Loading Skeleton for Task List */}
+            <div className="space-y-2">
+              {[1, 2, 3, 4].map((index) => (
+                <div key={index} className="flex items-center gap-4 p-4 rounded-lg">
+                  <Skeleton className="h-5 w-5 rounded-md" />
+                  <Skeleton className="flex-1 h-5" />
+                </div>
+              ))}
+            </div>
+          </div>
+        </Card>
+      </div>
+    );
+  }
+
   if (error) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center p-4">
@@ -154,6 +188,7 @@ const TodoApp = () => {
                   key={task.id}
                   task={task}
                   onToggle={() => toggleTask(task.id, task.completed)}
+                  onDelete={() => deleteTask(task.id)}
                 />
               ))
             )}
@@ -167,9 +202,10 @@ const TodoApp = () => {
 interface TaskItemProps {
   task: Task;
   onToggle: () => void;
+  onDelete: () => void;
 }
 
-const TaskItem: React.FC<TaskItemProps> = ({ task, onToggle }) => {
+const TaskItem: React.FC<TaskItemProps> = ({ task, onToggle, onDelete }) => {
   return (
     <div className="flex items-center gap-4 p-4 rounded-lg hover:bg-muted/50 transition-all duration-300 cursor-pointer group">
       <div className="flex items-center">
@@ -188,6 +224,17 @@ const TaskItem: React.FC<TaskItemProps> = ({ task, onToggle }) => {
       >
         {task.title}
       </span>
+      <Button
+        variant="ghost"
+        size="icon"
+        onClick={(e) => {
+          e.stopPropagation();
+          onDelete();
+        }}
+        className="opacity-0 group-hover:opacity-100 transition-opacity h-8 w-8 hover:bg-destructive/10 hover:text-destructive"
+      >
+        <Trash2 className="h-4 w-4" />
+      </Button>
     </div>
   );
 };

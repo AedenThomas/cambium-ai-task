@@ -69,7 +69,7 @@ def read_task(task_id: int, db: Session = Depends(get_db)):
     return db_task
 
 
-@app.post("/tasks/", response_model=schemas.Task)
+@app.post("/tasks/", response_model=schemas.Task, status_code=201)
 def create_task(task: schemas.TaskCreate, db: Session = Depends(get_db)):
     """Create a new task"""
     return crud.create_task(db=db, task=task)
