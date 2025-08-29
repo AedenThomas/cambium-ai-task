@@ -1,244 +1,154 @@
 # Full-Stack Todo Application
 
-A complete, production-ready CRUD todo application built with React frontend, Python FastAPI backend, and PostgreSQL database.
+A simple and useful CRUD to-do app, built as part of the Cambium AI Graduate Software Developer task. This project was developed in under 2 hours by maximally leveraging AI tools for planning, scaffolding, and implementation.
 
-## 🚀 Features
+The application features a modern React/TypeScript frontend prototyped with **Lovable**, a robust Python **FastAPI** backend, and a persistent **PostgreSQL** database managed with **Docker**.
 
-- ✅ **Full CRUD Operations**: Create, Read, Update, and Delete tasks
-- ✅ **Real-time Updates**: Instant UI updates with React Query state management
-- ✅ **Modern UI/UX**: Beautiful, responsive design with Shadcn/ui components
-- ✅ **Type Safety**: Full TypeScript implementation across frontend and backend
-- ✅ **Error Handling**: Comprehensive error handling with user-friendly notifications
-- ✅ **Database Persistence**: PostgreSQL database with proper migrations
-- ✅ **API Documentation**: Auto-generated OpenAPI/Swagger documentation
-- ✅ **Production Ready**: Docker setup, environment configuration, and best practices
+## Key Features
 
-## 🛠 Technology Stack
+- **Full CRUD Functionality**: Create, read, and mark tasks as complete.
+- **Data Persistence**: All tasks are saved across sessions in a PostgreSQL database.
+- **Modern Stack**: Built with React, TypeScript, FastAPI, and SQLAlchemy.
+- **Excellent DX**: Simple setup with Docker Compose and clear run commands.
+- **Automated Migrations**: Database schema managed by Alembic.
+- **Robust API**: Well-structured, validated, and tested API endpoints.
+- **Polished UI/UX**: Includes loading, empty, and error states for a smooth user experience.
 
-### Frontend
-- **React 18.x** with TypeScript
-- **Vite** - Fast build tool and development server
-- **Tailwind CSS** - Utility-first CSS framework
-- **Shadcn/ui** - Modern, accessible component library
-- **React Query (@tanstack/react-query)** - Server state management
-- **Axios** - HTTP client for API communication
-- **React Router** - Client-side routing
+## Technology Stack
 
-### Backend
-- **FastAPI** - Modern, fast web framework for building APIs
-- **SQLAlchemy** - Python SQL toolkit and ORM
-- **PostgreSQL** - Robust, open-source relational database
-- **Alembic** - Database migration tool
-- **Pydantic** - Data validation using Python type annotations
-- **Uvicorn** - ASGI server implementation
-
-### Infrastructure
-- **Docker & Docker Compose** - Containerization and orchestration
-- **CORS Middleware** - Cross-origin resource sharing configuration
-
-## 📦 Installation & Setup
-
-### Prerequisites
-- Node.js 18+ and npm
-- Python 3.8+
-- Docker and Docker Compose
-
-### 1. Clone the Repository
-```bash
-git clone <repository-url>
-cd cambium-ai-task
-```
-
-### 2. Backend Setup
-```bash
-# Navigate to backend directory
-cd backend
-
-# Create virtual environment
-python3 -m venv .venv
-
-# Activate virtual environment
-source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-
-# Install dependencies
-pip install -r requirements.txt
-```
-
-### 3. Database Setup
-```bash
-# Start PostgreSQL database
-docker-compose up -d db
-
-# Run database migrations
-cd backend
-source .venv/bin/activate
-alembic upgrade head
-```
-
-### 4. Frontend Setup
-```bash
-# Navigate to frontend directory
-cd frontend
-
-# Install dependencies
-npm install
-```
-
-## 🚀 Running the Application
-
-### Start the Backend Server
-```bash
-cd backend
-source .venv/bin/activate
-python main.py
-```
-The API will be available at `http://localhost:8000`
-
-### Start the Frontend Development Server
-```bash
-cd frontend
-npm run dev
-```
-The application will be available at `http://localhost:8080`
-
-### Access Points
-- **Frontend Application**: http://localhost:8080
-- **Backend API**: http://localhost:8000
-- **API Documentation**: http://localhost:8000/docs (Swagger UI)
-- **Alternative API Docs**: http://localhost:8000/redoc
-
-## 📋 Usage
-
-1. **Add Tasks**: Enter task description and click "Add Task"
-2. **Complete Tasks**: Click the checkbox to mark tasks as completed
-3. **View Tasks**: All tasks are displayed with real-time updates
-4. **Task States**: Completed tasks show with strikethrough text and grayed-out appearance
-
-## 🏗 Project Structure
-
-```
-cambium-ai-task/
-├── frontend/                   # React TypeScript application
-│   ├── src/
-│   │   ├── components/        # React components
-│   │   │   ├── ui/           # Shadcn/ui components
-│   │   │   └── TodoApp.tsx   # Main todo application component
-│   │   ├── lib/              # Utility functions and API client
-│   │   │   └── api.ts        # API service layer with type definitions
-│   │   ├── pages/            # Page components
-│   │   ├── hooks/            # Custom React hooks
-│   │   └── main.tsx          # Application entry point
-│   ├── package.json          # Frontend dependencies
-│   └── vite.config.ts        # Vite configuration
-├── backend/                    # FastAPI application
-│   ├── alembic/               # Database migration files
-│   ├── crud.py                # Database CRUD operations
-│   ├── database.py            # Database connection and session management
-│   ├── main.py                # FastAPI application entry point
-│   ├── models.py              # SQLAlchemy database models
-│   ├── schemas.py             # Pydantic data validation schemas
-│   ├── requirements.txt       # Python dependencies
-│   └── alembic.ini           # Alembic configuration
-├── docker-compose.yml         # Docker services configuration
-├── .env                       # Environment variables
-├── .env.example              # Environment variables template
-└── README.md                 # Project documentation
-```
-
-## 🔌 API Endpoints
-
-### Tasks
-- `GET /tasks/` - Retrieve all tasks
-- `GET /tasks/{task_id}` - Retrieve a specific task
-- `POST /tasks/` - Create a new task
-- `PUT /tasks/{task_id}` - Update an existing task
-- `DELETE /tasks/{task_id}` - Delete a task
-
-### Health & Info
-- `GET /` - Root endpoint with welcome message
-- `GET /health` - Health check endpoint
-
-### Task Data Model
-```json
-{
-  "id": 1,
-  "title": "Complete the todo application",
-  "completed": false
-}
-```
-
-## 🧪 Development Notes
-
-### Database Migrations
-```bash
-# Create a new migration
-alembic revision --autogenerate -m "Description of changes"
-
-# Apply migrations
-alembic upgrade head
-
-# Rollback to previous migration
-alembic downgrade -1
-```
-
-### Environment Variables
-The application uses the following environment variables:
-- `DATABASE_URL` - PostgreSQL connection string
-- `POSTGRES_USER` - Database username
-- `POSTGRES_PASSWORD` - Database password
-- `POSTGRES_DB` - Database name
-- `API_HOST` - FastAPI host (default: localhost)
-- `API_PORT` - FastAPI port (default: 8000)
-
-### CORS Configuration
-The backend is configured to accept requests from:
-- `http://localhost:5173` (Vite default)
-- `http://localhost:3000` (Create React App default)
-- `http://localhost:8080` (Current frontend port)
-
-## 🔧 Development Commands
-
-### Frontend
-```bash
-npm run dev        # Start development server
-npm run build      # Build for production
-npm run preview    # Preview production build
-npm run lint       # Run ESLint
-```
-
-### Backend
-```bash
-python main.py              # Start FastAPI server
-alembic upgrade head        # Apply database migrations
-alembic revision --autogenerate -m "message"  # Create new migration
-```
-
-## 🐳 Docker Commands
-
-```bash
-docker-compose up -d db     # Start only PostgreSQL database
-docker-compose up -d        # Start all services
-docker-compose down         # Stop all services
-docker-compose logs db      # View database logs
-```
-
-## 🚀 Production Deployment
-
-For production deployment, consider:
-
-1. **Environment Variables**: Use production database credentials
-2. **CORS Origins**: Update allowed origins for your domain
-3. **Database**: Use managed PostgreSQL service (AWS RDS, Google Cloud SQL, etc.)
-4. **Frontend**: Build and serve static files via CDN
-5. **Backend**: Deploy using Docker containers or serverless functions
-6. **SSL/TLS**: Enable HTTPS for secure communication
+- **Frontend**: React, TypeScript, Vite, Tailwind CSS, shadcn/ui, TanStack Query
+- **Backend**: Python, FastAPI, Pydantic, SQLAlchemy
+- **Database**: PostgreSQL
+- **DevOps & Tooling**: Docker, Docker Compose, Alembic, Pytest
 
 ---
 
-## 📝 License
+## 🚀 How to Run
 
-This project is open source and available under the [MIT License](LICENSE).
+### Prerequisites
 
-## 🤝 Contributing
+- Node.js (v18+)
+- Python (v3.8+)
+- Docker & Docker Compose
 
-Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](issues).
+### Step 1: Clone the Repository
+
+```bash
+git clone <your-repository-url>
+cd aedenthomas-cambium-ai-task
+```
+
+### Step 2: Configure Environment Variables
+
+Create a `.env` file in the project root by copying the example. No changes are needed to run locally with the default settings.
+
+```bash
+cp .env.example .env
+```
+
+### Step 3: Start the Database
+
+Run the PostgreSQL database container using Docker Compose.
+
+```bash
+docker-compose up db -d
+```
+
+### Step 4: Setup and Run the Backend
+
+1.  **Navigate to the backend directory:**
+
+    ```bash
+    cd backend
+    ```
+
+2.  **Create and activate a Python virtual environment:**
+
+    ```bash
+    python3 -m venv .venv
+    source .venv/bin/activate
+    # On Windows, use: .venv\Scripts\activate
+    ```
+
+3.  **Install dependencies:**
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+4.  **Run database migrations:**
+
+    ```bash
+    alembic upgrade head
+    ```
+
+5.  **Start the FastAPI server:**
+    ```bash
+    uvicorn main:app --reload
+    ```
+    The backend API will be running at `http://localhost:8000`.
+
+### Step 5: Setup and Run the Frontend
+
+1.  **In a new terminal, navigate to the frontend directory:**
+
+    ```bash
+    cd frontend
+    ```
+
+2.  **Install dependencies:**
+
+    ```bash
+    npm install
+    ```
+
+3.  **Start the development server:**
+    ```bash
+    npm run dev
+    ```
+    The frontend application will be available at `http://localhost:8080`.
+
+**API Base URL:** The frontend is configured to communicate with the backend at `http://localhost:8000/api/v1`. This can be changed in `frontend/src/lib/api.ts` if needed.
+
+---
+
+## 🤖 Process & AI Tool Usage
+
+My process was designed to maximize efficiency and quality within the 2-hour timebox by strategically delegating tasks to a suite of AI tools.
+
+#### Phase 1: Planning and Frontend Scaffolding (Google AI Studio & Lovable)
+
+I began by using **Google AI Studio** to interact with Gemini. My goal was to draft a comprehensive, high-level plan for the entire project. I then tasked it with a meta-prompting exercise: "Draft an expert-level, comprehensive prompt for an AI UI generator that follows advanced prompting techniques to produce a polished, modern to-do application UI." This ensured the prompt given to Lovable was rich in detail, covering component libraries (shadcn/ui), a specific design system (colors, fonts, spacing), and desired states (empty, loading). This front-loading of detail minimized the need for iterative, time-consuming follow-up prompts in Lovable.
+
+#### Phase 2: Agentic Backend Development and Integration (Cursor)
+
+Once I downloaded the generated frontend from Lovable, I moved to my local environment and used **Cursor** alongside **Cline**. I leveraged its agentic capabilities to execute the backend and integration phases of my plan.
+
+Instead of asking the AI to write small, isolated functions, I used it as a pair programmer, guiding it with high-level, context-rich prompts based on established software engineering principles. My prompting strategy focused on:
+
+- **Providing Context:** "You are building a FastAPI backend for a to-do app. Here is the existing frontend structure. Create a corresponding backend structure with directories for schemas, models, and CRUD operations."
+- **Describing Ideas Comprehensively:** "Implement the full set of CRUD endpoints for the `Task` model. Ensure you use Pydantic for request/response validation, handle 404 errors for non-existent tasks, and use proper dependency injection for the database session."
+- **Specifying Frameworks and Best Practices:** "Integrate Alembic for database migrations. Initialize it, configure `env.py` to use our models, and generate the initial migration to create the `tasks` table."
+
+#### Phase 3: Automated Process Logging
+
+To maintain a clear and auditable trail of my interactions with the AI agent, I have a custom rule in my Cursor/Cline configuration that automatically logs key development steps and AI-driven architectural decisions to the `AGENTS.md` file. This serves as a transparent development log, detailing the project's evolution and the role AI played at each stage.
+
+---
+
+## Assumptions and Trade-offs
+
+- **State Management:** I chose **TanStack Query (React Query)** for frontend server state management. It simplifies data fetching, caching, and synchronization, significantly reducing boilerplate compared to `useState`/`useEffect` for API calls.
+- **Security:** The API is open for simplicity. In a production environment, I would implement authentication (e.g., OAuth2 with JWTs) to secure the endpoints.
+- **Testing:** For the backend, I used an in-memory SQLite database for tests to ensure they are fast and isolated, which is a standard practice. The frontend lacks dedicated tests due to the time constraint.
+- **Error Handling:** Backend error handling is robust (HTTP exceptions). Frontend error handling is implemented for key interactions (API fetching, mutations) using toasts, but could be extended to more granular cases.
+
+## TODOs (If I had more time)
+
+- **User Authentication**: Add user registration and login to support multi-user functionality.
+- **Frontend Testing**: Add unit and integration tests for React components using Vitest and React Testing Library.
+- **Advanced Features**: Implement features like task editing, due dates, and task filtering (e.g., all/active/completed).
+
+## Time Spent
+
+- **Total Time:** 5:50 PM - 7:00 PM (1 hour 10 minutes)
